@@ -29,6 +29,7 @@ func main() {
 	if helpFlag {
 		fmt.Printf("netcode v%v : Apache License, Robert Xu\n", VERSION)
 		pflag.PrintDefaults()
+		fmt.Printf("\nGood connection types: http://golang.org/pkg/net/#Listen\n")
 		return
 	}
 
@@ -38,7 +39,7 @@ func main() {
 	terminateSignal := make(chan os.Signal)
 	signal.Notify(terminateSignal, syscall.SIGINT)
 
-	fmt.Printf("now listening. ctrl-c to terminate.\n")
+	fmt.Printf("ctrl-c to terminate.\n")
 
 	<-terminateSignal
 	fmt.Printf("caught ctrl-c, stopping listener...\n")

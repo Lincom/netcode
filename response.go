@@ -25,6 +25,7 @@ func Listen(nettype string, loc string) {
 	if err != nil {
 		panic(err)
 	}
+	fmt.Printf("netchan: listening at %s\n", ln.Addr().String())
 
 	nextConn := make(chan net.Conn)
 
@@ -49,6 +50,8 @@ func Listen(nettype string, loc string) {
 			terminate = true
 		}
 	}
+
+	ln.Close()
 
 	return
 }
@@ -93,4 +96,5 @@ func handleConnectionRead(conn net.Conn) {
 		}
 		res.Respond(conn, detail)
 	}
+	conn.Close()
 }
